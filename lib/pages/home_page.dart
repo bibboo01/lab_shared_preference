@@ -10,9 +10,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // Declare your variable for data
   String? myname;
-  // Declare your function to load data
+
   void loadData() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
@@ -30,8 +29,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Home Page",style: TextStyle(color: Colors.white),),
-        backgroundColor: Colors.blueAccent,
+        title: const Text("Home Page"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -40,40 +38,28 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Show Your name
               Text(
                 myname ?? 'Wait a Moment',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.displayLarge,
               ),
-              // Button go to Another Page
-              SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 20),
               ElevatedButton(
-                  onPressed: () {
-                    if (myname == null) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text("Wait a Moment")));
-                    }else{
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const AnotherPage()));
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    backgroundColor: Colors.blueAccent, // Background color
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                    child: Text(
-                      'AnotherPage',
-                      style: TextStyle(fontSize: 18, color: Colors.white),
-                    ),
-                  )),
+                onPressed: () {
+                  if (myname == null) {
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(SnackBar(content: Text("Wait a Moment")));
+                  } else {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AnotherPage()));
+                  }
+                },
+                child: const Text(
+                  'AnotherPage',
+                  style: TextStyle(color: Colors.tealAccent),
+                ),
+              ),
             ],
           ),
         ),

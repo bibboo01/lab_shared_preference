@@ -21,8 +21,7 @@ class _FirstPageState extends State<FirstPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flutter Name Input',style: TextStyle(color: Colors.white),),
-        backgroundColor: Colors.blueAccent,
+        title: const Text('Flutter Name Input'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -31,13 +30,9 @@ class _FirstPageState extends State<FirstPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text(
+              Text(
                 'พิมพ์ชื่อของคุณ',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blueAccent,
-                ),
+                style: Theme.of(context).textTheme.displayLarge,
               ),
               const SizedBox(height: 20),
               TextField(
@@ -45,22 +40,19 @@ class _FirstPageState extends State<FirstPage> {
                 decoration: InputDecoration(
                   labelText: 'ชื่อ',
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(12),
                   ),
                   filled: true,
-                  fillColor: Colors.blue.shade50,
+                  fillColor: Theme.of(context).inputDecorationTheme.fillColor,
                   prefixIcon: const Icon(Icons.person),
                 ),
-                style: const TextStyle(fontSize: 18),
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  // save data to sharepreference
                   if (_nameController.text.trim().isNotEmpty) {
-                    //store data to sharepreference
                     saveData();
-                    // navigator to home page
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -70,43 +62,20 @@ class _FirstPageState extends State<FirstPage> {
                         SnackBar(content: Text("Please Enter Your Name")));
                   }
                 },
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  backgroundColor: Colors.blueAccent, // Background color
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                  child: Text(
-                    'ยืนยัน',
-                    style: TextStyle(fontSize: 18, color: Colors.white),
-                  ),
-                ),
+                child: const Text('ยืนยัน',
+                    style: TextStyle(color: Colors.tealAccent)),
               ),
-              SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 20),
               ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const HomePage()));
-                  },
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    backgroundColor: Colors.blueAccent, // Background color
-                  ),
-                  child: const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                  child: Text(
-                    'HomePage',
-                    style: TextStyle(fontSize: 18, color: Colors.white),
-                  ),
-                ),),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const HomePage()));
+                },
+                child: const Text('HomePage',
+                    style: TextStyle(color: Colors.tealAccent)),
+              ),
             ],
           ),
         ),
